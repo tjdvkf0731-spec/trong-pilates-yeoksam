@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>결제 실패 - STRONG Pilates</title>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;900&display=swap"
+        rel="stylesheet">
+    <style>
+        :root {
+            --bg-black: #000000;
+            --text-white: #ffffff;
+            --text-gray: #888888;
+            --error-red: #ef4444;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Noto Sans KR', sans-serif;
+            background: var(--bg-black);
+            color: var(--text-white);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 40px 20px;
+        }
+
+        .result-container {
+            max-width: 480px;
+            width: 100%;
+            text-align: center;
+        }
+
+        .fail-icon {
+            width: 100px;
+            height: 100px;
+            background: var(--error-red);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 30px;
+        }
+
+        .fail-icon svg {
+            width: 50px;
+            height: 50px;
+            fill: white;
+        }
+
+        h1 {
+            font-size: 32px;
+            font-weight: 900;
+            margin-bottom: 16px;
+        }
+
+        .message {
+            color: var(--text-gray);
+            font-size: 16px;
+            line-height: 1.6;
+            margin-bottom: 16px;
+        }
+
+        .error-code {
+            background: rgba(239, 68, 68, 0.1);
+            border: 1px solid rgba(239, 68, 68, 0.3);
+            border-radius: 8px;
+            padding: 12px 20px;
+            color: var(--error-red);
+            font-size: 14px;
+            margin-bottom: 40px;
+            display: inline-block;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 16px;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .retry-button {
+            padding: 16px 40px;
+            font-size: 16px;
+            font-weight: 700;
+            background: linear-gradient(135deg, #7dd3fc 0%, #38bdf8 100%);
+            color: #000;
+            text-decoration: none;
+            border-radius: 50px;
+            transition: transform 0.2s;
+        }
+
+        .retry-button:hover {
+            transform: translateY(-2px);
+        }
+
+        .home-button {
+            padding: 16px 40px;
+            font-size: 16px;
+            font-weight: 700;
+            background: transparent;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            color: var(--text-white);
+            text-decoration: none;
+            border-radius: 50px;
+            transition: background 0.2s;
+        }
+
+        .home-button:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+    </style>
+</head>
+
+<body>
+    <div class="result-container">
+        <div class="fail-icon">
+            <svg viewBox="0 0 24 24">
+                <path
+                    d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+            </svg>
+        </div>
+
+        <h1>결제에 실패했습니다</h1>
+        <p class="message">
+            죄송합니다. 결제 처리 중 문제가 발생했습니다.<br>
+            다시 시도해주세요.
+        </p>
+
+        <div class="error-code" id="errorCode">오류 코드: 알 수 없음</div>
+
+        <div class="buttons">
+            <a href="checkout.html" class="retry-button">다시 시도하기</a>
+            <a href="index.html" class="home-button">홈으로</a>
+        </div>
+    </div>
+
+    <script>
+        // URL에서 에러 정보 가져오기
+        const urlParams = new URLSearchParams(window.location.search);
+        const errorCode = urlParams.get('code') || '알 수 없음';
+        const errorMessage = urlParams.get('message') || '';
+
+        document.getElementById('errorCode').textContent =
+            errorMessage ? `${errorCode}: ${errorMessage}` : `오류 코드: ${errorCode}`;
+    </script>
+</body>
+
+</html>
